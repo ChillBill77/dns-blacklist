@@ -1,0 +1,22 @@
+# YaWorks DNS Blocklist — Source URLs
+# Format: <name> <url>
+# Lines starting with # are ignored
+# 
+# Supported input formats:
+#   - hosts format    (0.0.0.0 domain.tld  or  127.0.0.1 domain.tld)
+#   - plain domain    (one domain per line)
+
+stevenblack_hosts     https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+blp_abuse             https://blocklistproject.github.io/Lists/abuse.txt
+blp_phishing          https://blocklistproject.github.io/Lists/phishing.txt
+blp_malware           https://blocklistproject.github.io/Lists/malware.txt
+blp_ransomware        https://blocklistproject.github.io/Lists/ransomware.txt
+blp_scam              https://blocklistproject.github.io/Lists/scam.txt
+phishtank             https://raw.githubusercontent.com/tg12/pihole-phishtank-list/master/list/phish_domains.txt
+bbcan177_ms3          https://gist.githubusercontent.com/BBcan177/4a8bf37c131be4803cb2/raw
+joewein_dombl         https://www.joewein.net/dl/bl/dom-bl.txt
+Stevenblack_addware.  https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+oisd_big	      https://big.oisd.nl/domainswild2
+hagezi_aggrssive.     https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/ultimate-onlydomains.txt
+hagezi_nrd14	      https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/nrd14-8.txt
+shresta_nrd7.         https://shreshtait.com/newly-registered-domains/nrd-1w

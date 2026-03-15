@@ -1,0 +1,90 @@
+name: Update Blocklist
+
+on:
+  schedule:
+    # Every 48 hours — 03:00 UTC on odd days (day-of-month mod 2 not possible natively,
+    # so we run every day and let the script handle idempotency; or use manual dispatch)
+    # GitHub Actions minimum granularity: daily. We use every 2 days via cron:
+    - cron: '0 3 */2 * *'   # 03:00 UTC, every 2 days
+
+  workflow_dispatch:          # allow manual trigger from GitHub UI
+    inputs:
+      dry_run:
+        description: 'Dry run (download + parse, skip commit)'
+        required: false
+        default: 'false'
+        type: boolean
+
+  push:
+    branches: [ main ]
+    paths:
+      - 'sources.txt'         # also trigger when source list changes
+      - 'merge.sh'
+
+jobs:
+  build:
+    name: Merge & publish blocklist
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write           # needed to push dist/ back to repo
+
+    steps:
+      # -----------------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # full history so git log works in merge.sh
+
+      # -----------------------------------------------------------------------
+      - name: Make merge script executable
+        run: chmod +x merge.sh
+
+      # -----------------------------------------------------------------------
+      - name: Restore download cache
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: blocklist-cache-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            blocklist-cache-${{ runner.os }}-
+
+      # -----------------------------------------------------------------------
+      - name: Run merge
+        env:
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          if [[ "$DRY_RUN" == "true" ]]; then
+            ./merge.sh --dry-run
+          else
+            ./merge.sh
+          fi
+
+      # -----------------------------------------------------------------------
+      - name: Show stats
+        if: always()
+        run: |
+          if [[ -f dist/stats.json ]]; then
+            echo "### Build Stats" >> $GITHUB_STEP_SUMMARY
+            echo '```json' >> $GITHUB_STEP_SUMMARY
+            cat dist/stats.json >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+
+      # -----------------------------------------------------------------------
+      - name: Commit and push updated blocklist
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add dist/blocklist.txt dist/stats.json
+
+          # Only commit if something actually changed
+          if git diff --cached --quiet; then
+            echo "No changes — blocklist is already up to date."
+          else
+            DOMAINS=$(jq -r '.total_unique_domains' dist/stats.json)
+            TIMESTAMP=$(jq -r '.generated_at' dist/stats.json)
+            git commit -m "chore: update blocklist [${TIMESTAMP}] — ${DOMAINS} domains"
+            git push
+          fi

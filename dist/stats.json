@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-03-15T15:29:18Z",
+  "git_sha": "2d7ed02",
+  "total_unique_domains": 758011,
+  "sources": {
+    "stevenblack_hosts": 81125,
+    "blp_abuse": 434701,
+    "blp_phishing": 190095,
+    "blp_malware": 434784,
+    "blp_ransomware": 1904,
+    "blp_scam": 1274,
+    "phishtank": 49855,
+    "bbcan177_ms3": 17326,
+    "joewein_dombl": 181
+  },
+  "failed_sources": []
+}
