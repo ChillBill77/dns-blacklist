@@ -130,7 +130,3 @@ After each run, `dist/stats.json` contains a machine-readable build summary:
   "failed_sources": []
 }
 ```
-
----
-
-*Maintained by [YaWorks](https://yaworks.nl) — IT Infrastructure & Cybersecurity*
