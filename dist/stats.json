@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-06-21T07:25:05Z",
-  "git_sha": "1a7b594",
-  "total_unique_domains": 3920874,
+  "generated_at": "2026-06-25T06:39:24Z",
+  "git_sha": "644f788",
+  "total_unique_domains": 3963550,
   "sources": {
-    "stevenblack_hosts": 83940,
-    "blp_abuse": 434701,
-    "blp_phishing": 190095,
-    "blp_malware": 434784,
+    "stevenblack_hosts": 82618,
+    "blp_abuse": 434687,
+    "blp_phishing": 190092,
+    "blp_malware": 434773,
     "blp_ransomware": 1904,
-    "blp_scam": 1274,
+    "blp_scam": 1275,
     "phishtank": 49855,
     "bbcan177_ms3": 17326,
     "joewein_dombl": 181,
-    "Stevenblack_addware.": 83940,
-    "oisd_big": 477303,
-    "hagezi_aggrssive.": 263630,
-    "hagezi_nrd14": 2575312
+    "Stevenblack_addware.": 82618,
+    "oisd_big": 474617,
+    "hagezi_aggrssive.": 264537,
+    "hagezi_nrd14": 2622587
   },
   "failed_sources": []
 }
