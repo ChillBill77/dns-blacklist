@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-15T03:30:21Z",
-  "git_sha": "8d4fb36",
-  "total_unique_domains": 3194385,
+  "generated_at": "2026-08-17T03:40:40Z",
+  "git_sha": "8747683",
+  "total_unique_domains": 3198505,
   "sources": {
     "stevenblack_hosts": 98946,
     "blp_abuse": 434677,
@@ -13,8 +13,8 @@
     "bbcan177_ms3": 17326,
     "joewein_dombl": 181,
     "Stevenblack_addware.": 98946,
-    "oisd_big": 266494,
-    "hagezi_aggrssive.": 261806
+    "oisd_big": 269226,
+    "hagezi_aggrssive.": 264520
   },
   "failed_sources": [
     "hagezi_nrd14 (download failed)"
